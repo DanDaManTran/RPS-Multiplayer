@@ -1,0 +1,123 @@
+.heading{
+	text-align: center;
+	color: white;
+}
+
+.fadedWhite{
+	background-color: rgba(255,255,255,0.2);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+.nameInput{
+	text-align: center;
+}
+
+.inputStyle{
+	width: 15rem;
+	height: 3rem;
+	margin-right: 2rem;
+	margin-left: 2rem;
+}
+
+.enterName{
+	font-size: 2rem;
+	font-weight: bold;
+	color: white;
+}
+
+.leftCol{
+	margin: auto;
+	text-align: center;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 3rem;
+	width: 30rem;
+	margin-left: 10rem;
+	height: 25rem;
+}
+
+.midCol{
+	margin: auto;
+	text-align: center;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 3rem;
+	width: 30rem;
+	height: 25rem;
+}
+
+.rightCol{
+	margin: auto;
+	text-align: center;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 3rem;
+	width: 30rem;
+	margin-right: 10rem;
+	height: 25rem;
+}
+
+.btn{
+	width: 9rem;
+	margin: 1rem;
+	font-weight: bold;
+}
+
+
+
+.rockBtn:hover{
+	color: white;
+}
+
+.rockBtn{
+	background-color: #5A4D41;
+	color: white;
+}
+
+.paperBtn{
+	background-color: #F1F1D4;
+	color: black;
+}
+
+.scissorBtn{
+	background-color: #BCC6CC;
+	color: black;
+}
+
+.winLose{
+	font-size: 2rem;
+}
+
+.chat{
+	background-color: rgba(0, 0, 0, 0.4);
+	width: 63rem;
+	height: 25rem;
+	margin-left: 10rem;
+	margin-top: 1rem;
+	padding-top: 3rem;
+}
+#chatBox{
+	width: 60rem;
+	height: 15rem;
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 1rem;
+	margin: auto;
+}
+
+.inputSub{
+	margin: auto;
+	width: 60rem;
+}
+
+#inputBox{
+	width: 48rem;
+}
+
+footer{
+	font-size: 2rem;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}

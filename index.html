@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RPS</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/javascript/app.js"></script>
+</head>
+<body background="assets/images/rps.jpg">
+	<!-- fadeing out the background with white -->
+	<div class="fadedWhite">
+		<!-- title of the game -->
+		<div class="container heading">
+			<h1>Rock Paper Sissor</h1>
+		</div>
+		<!-- the input row where player would input their name to play -->
+		<div class="nameInput">
+			<span class="enterName">Enter your name</span><input class="inputStyle" type="input" placeholder="DanTran"><button type="button">Submit</button>
+		</div>
+	
+		<div class="row">
+			<!-- the left section of the game -->
+			<div class="col-sm-4">
+				<div class="leftCol">
+					<h2>Player 1</h2>
+
+					<div class="allBtn">
+						<p class="btn rockBtn" data-value="rock">Rock</p><br>
+						<p class="btn paperBtn" data-value="paper">Paper</p><br>
+						<p class="btn scissorBtn" data-value="scissor">Scissors</p><br>
+					</div>
+
+					<p class="winLose">Wins: <span>0 </span>Losses: <span>0</span></p>
+				</div>
+			</div>
+			<!-- middle section where it will display the results -->
+			<div class="col-sm-4">
+				<div class="midCol">
+					<h2>Battle Ground</h2>
+					
+					<div>
+						
+					</div>
+				</div>
+			</div>
+			<!-- the left section of the game -->
+			<div class="col-sm-4">
+				<div class="rightCol">
+					<h2>Player 2</h2>
+					
+					<div class="allBtn">
+						<p class="btn rockBtn" data-value="rock">Rock</p><br>
+						<p class="btn paperBtn" data-value="paper">Paper</p><br>
+						<p class="btn scissorBtn" data-value="scissor">Scissors</p><br>
+					</div>
+
+					<p class="winLose">Wins: <span>0 </span>Losses: <span>0</span></p>
+				</div>
+			</div>
+		</div>
+
+		<!-- chat box -->
+		<div class="chat">
+			<div>
+				<div id="chatBox">
+					
+				</div>
+			</div>
+			
+			<div class="inputSub">
+				<input id="inputBox" type="input"><button class="btn">Enter</button>
+			</div>
+		</div>
+		<footer>DanDaManTran &copy;2016</footer>
+	</div>
+</body>
+</html>
