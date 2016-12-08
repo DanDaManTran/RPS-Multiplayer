@@ -1,3 +1,7 @@
+p{
+	margin: 0;
+}
+
 .heading{
 	text-align: center;
 	color: white;
@@ -5,9 +9,7 @@
 
 .fadedWhite{
 	background-color: rgba(255,255,255,0.2);
-	position: fixed;
 	width: 100%;
-	height: 100%;
 }
 
 .nameInput{
@@ -104,6 +106,7 @@
 	background-color: rgba(255, 255, 255, 0.4);
 	border-radius: 1rem;
 	margin: auto;
+	overflow: auto;
 }
 
 .inputSub{
