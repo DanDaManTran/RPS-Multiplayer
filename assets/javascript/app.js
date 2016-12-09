@@ -39,7 +39,7 @@ $("document").ready(function(){
   }
   //when the chatroom enterBtn is press it get a timestamp and the context of the input and store it in the firebase database
   $("#enterBtn").on("click", function(){
-    event.preventDefaut();
+    // event.preventDefaut();
     var input = moment().format('h:mm:ss a') + ":  " + $("#inputBox").val().trim();
 
     $("#inputBox").val(""); //clear input box after it has been submitted
@@ -47,7 +47,7 @@ $("document").ready(function(){
     database.ref().push({
       message: input
     });
-
+    return false;
   });
 
   //setting playername in the firebase database
