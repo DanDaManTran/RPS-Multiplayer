@@ -47,7 +47,7 @@ $("document").ready(function(){
     database.ref().push({
       message: input
     });
-    
+
     return false;
   });
 
@@ -111,26 +111,18 @@ $("document").ready(function(){
 
     } else if(choice1!==undefined&&choice2!==undefined){
       if((choice1==="rock"&&choice2==="scissor")||(choice1==="scissor"&&choice2==="paper")||(choice1==="paper"&&choice2==="rock")){
-        $("#battleStatus").html(player1 + " is the WINNER!");
+        $("#battleStatus").html("<h1>" + player1 + " is the WINNER!</h1><p>" + player1 + " chose " + choice1 + "</p><p>"+ player2 + " chose " + choice2);
         wins++;
-        statusUpdate()
+        statusUpdate();
       } else if((choice2==="rock"&&choice1==="scissor")||(choice2==="scissor"&&choice1==="paper")||(choice2==="paper"&&choice1==="rock")){
-        $("#battleStatus").html(player2 + " is the WINNER!");
+        $("#battleStatus").html("<h1>" + player2 + " is the WINNER!</h1><p>" + player1 + " chose " + choice1 + "</p><p>"+ player2 + " chose " + choice2);
         loses++;
         statusUpdate();
       } else {
-        $("#battleStatus").html("IT'S A TIE!");
+        $("#battleStatus").html("<h1>IT'S A TIE!</h1><p>" + player1 + " chose " + choice1 + "</p><p>"+ player2 + " chose " + choice2);
         statusUpdate();
       }
     } 
-    // else if(choice2!==undefined){
-    //   $("#all2Btn").css('visibility', 'hidden');
-    //   $("#battleStatus").html(player2 + " has chosen!");
-    // } else if(choice1!==undefined){
-    //   $("#all1Btn").css('visibility', 'hidden');
-    //   $("#battleStatus").html(player1 + " has chosen!");
-    // }
-
 
   });
 
