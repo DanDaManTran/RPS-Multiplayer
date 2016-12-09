@@ -1,8 +1,5 @@
 //initaializing firebase
 
-//https://calm-thicket-77557.herokuapp.com/
-
-
 var config = {
   apiKey: "AIzaSyA9IHRLhqM8poTc6Z9gNgYBkzls2Kv8ago",
   authDomain: "rps-multiplayer-dc43c.firebaseapp.com",
