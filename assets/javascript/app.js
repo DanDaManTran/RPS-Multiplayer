@@ -47,7 +47,7 @@ $("document").ready(function(){
     database.ref().push({
       message: input
     });
-
+    
     return false;
   });
 
@@ -77,6 +77,7 @@ $("document").ready(function(){
   database.ref().on("child_added", function(childsnapshot) {
     var dataMessage = childsnapshot.val().message;
     console.log("child added");
+
     if(childsnapshot.child("message").exists()){
       $("#chatBox").prepend("<p>"+dataMessage+"</p>");
     }
