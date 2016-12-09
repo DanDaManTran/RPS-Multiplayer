@@ -115,6 +115,16 @@ p{
 	overflow: auto;
 }
 
+.player1Mes{
+	background-color: rgba(255, 255, 255, 0.7);
+	font-weight: bold;
+}
+
+.player2Mes{
+	background-color: rgba(255, 255, 255, 0.1);
+	font-weight: bold;
+}
+
 .inputSub{
 	margin: auto;
 	width: 60rem;

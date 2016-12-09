@@ -54,23 +54,25 @@ $("document").ready(function(){
 
   //setting playername in the firebase database
   $("#submtNameBtn").on("click",function(){
-    currentPlayer = $("#inputName").val().trim();
-    $("#inputName").val("");
+    if(currentPlayer===""){
+      currentPlayer = $("#inputName").val().trim();
+      $("#inputName").val("");
 
-    if(player1===null){
-      database.ref('/player/' + 1).set({
-          playerName: currentPlayer,
-          dataWins: loses,
-          dataLoses: wins
-      });
-    } else if(player2===null){
-      database.ref('/player/' + 2).set({
-          playerName: currentPlayer,
-          dataWins: wins,
-          dataLoses: loses
-      });
-    } else{
-      $("#battleStatus").text("To many players")
+      if(player1===null){
+        database.ref('/player/' + 1).set({
+            playerName: currentPlayer,
+            dataWins: loses,
+            dataLoses: wins
+        });
+      } else if(player2===null){
+        database.ref('/player/' + 2).set({
+            playerName: currentPlayer,
+            dataWins: wins,
+            dataLoses: loses
+        });
+      } else{
+        $("#battleStatus").text("To many players")
+      }
     }
   });
 
@@ -80,7 +82,11 @@ $("document").ready(function(){
     console.log("child added");
 
     if(childsnapshot.child("message").exists()){
-      $("#chatBox").prepend("<p>"+dataMessage+"</p>");
+      if(dataMessage.substring(0, dataMessage.indexOf(' '))===player1){
+        $("#chatBox").prepend("<p class='player1Mes'>"+dataMessage+"</p>");
+      } else {
+        $("#chatBox").prepend("<p class='player2Mes'>"+dataMessage+"</p>");
+      }
     }
 
     if(childsnapshot.child(1).exists()){
