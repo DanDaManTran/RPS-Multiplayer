@@ -67,7 +67,9 @@ p{
 	font-weight: bold;
 }
 
-
+#all1Btn, .winLose, #all2Btn{
+	visibility: hidden;
+}
 
 .rockBtn:hover{
 	color: white;

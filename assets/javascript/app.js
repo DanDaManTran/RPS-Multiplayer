@@ -8,7 +8,6 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
-var players = database.ref('/players');
 var player1 = null;
 var player2 = null;
 var playerNum = 0;
@@ -22,8 +21,22 @@ $("document").ready(function(){
     message: ""
   });
 
-
-
+  function statusUpdate(){
+    database.ref('/player/' + 1).set({
+      playerName: player1,
+      dataWins: wins,
+      dataLoses: loses
+    });
+    database.ref('/player/' + 2).set({
+      playerName: player2,
+      dataWins: loses,
+      dataLoses: wins
+    });
+    $("#win1").text(wins);
+    $("#lose1").text(loses);
+    $("#win2").text(loses);
+    $("#lose2").text(wins);
+  }
   //when the chatroom enterBtn is press it get a timestamp and the context of the input and store it in the firebase database
   $("#enterBtn").on("click", function(){
 
@@ -44,21 +57,17 @@ $("document").ready(function(){
     $("#inputName").val("");
 
     if(player1===null){
-      playerNum = 1;
-      database.ref('/player/' + playerNum).set({
+      database.ref('/player/' + 1).set({
           playerName: inputName,
-          dataWins: 0,
-          dataLoses: 0
+          dataWins: loses,
+          dataLoses: wins
       });
-      // player1 = playerNum;
     } else if(player2===null){
-      playerNum = 2;
-      database.ref('/player/' + playerNum).set({
+      database.ref('/player/' + 2).set({
           playerName: inputName,
-          dataWins: 0,
-          dataLoses: 0
+          dataWins: wins,
+          dataLoses: loses
       });
-      // player2 = playerNum;
     } else{
       $("#battleStatus").text("To many players")
     }
@@ -67,37 +76,83 @@ $("document").ready(function(){
   //once context is uploaded into firebase it shoots it into the chat box at the top
   database.ref().on("child_added", function(childsnapshot) {
     var dataMessage = childsnapshot.val().message;
-
+    console.log("child added");
     if(childsnapshot.child("message").exists()){
       $("#chatBox").prepend("<p>"+dataMessage+"</p>");
     }
 
     if(childsnapshot.child(1).exists()){
-      console.log(childsnapshot.child(1).playerName);
-    } else if(childsnapshot.child(2).exists()){
-      player2 = "name";
+      player1 = childsnapshot.child(1).val().playerName;
+      $("#player1Name").text(player1);
     }
+
+
   });
 
 
-  database.ref().on("value", function(snapshot) {
-  
-    if(snapshot.child(1).exists()){
-      console.log("Hello");
+  database.ref().on("child_changed", function(changedchildsnapshot) {
+    console.log("changed child");
+    if(changedchildsnapshot.child(2).exists()){
+      player2 = changedchildsnapshot.child(2).val().playerName;
+      $("#player2Name").text(player2);
+      $("#all1Btn").css('visibility', 'visible');
+      $("#all2Btn").css('visibility', 'visible');
+      $(".winLose").css('visibility', 'visible');
     }
-    // if(snapshot.child(1).exists()){
-    //   player1 = "something";
-    //   console.log(player1);
-    //   console.log(player2);
-    // } else if(snapshot.child(2).exists()){
-    //   player2 = "something2";
-    //   console.log(player1);
-    //   console.log(player2);
+    var choice1 = changedchildsnapshot.child(1).val().playerChoice;
+    var choice2 = changedchildsnapshot.child(2).val().playerChoice;
+    // console.log(changedchildsnapshot.child(1).val().playerChoice);
+    if(choice1 !== undefined && choice2 === undefined){
+      $("#all1Btn").css('visibility', 'hidden');
+
+    } else if(choice2 !== undefined && choice1 === undefined){
+      $("#all2Btn").css('visibility', 'hidden');
+
+    } else if(choice1!==undefined&&choice2!==undefined){
+      if((choice1==="rock"&&choice2==="scissor")||(choice1==="scissor"&&choice2==="paper")||(choice1==="paper"&&choice2==="rock")){
+        $("#battleStatus").html(player1 + " is the WINNER!");
+        wins++;
+        statusUpdate()
+      } else if((choice2==="rock"&&choice1==="scissor")||(choice2==="scissor"&&choice1==="paper")||(choice2==="paper"&&choice1==="rock")){
+        $("#battleStatus").html(player2 + " is the WINNER!");
+        loses++;
+        statusUpdate();
+      } else {
+        $("#battleStatus").html("IT'S A TIE!");
+        statusUpdate();
+      }
+    } 
+    // else if(choice2!==undefined){
+    //   $("#all2Btn").css('visibility', 'hidden');
+    //   $("#battleStatus").html(player2 + " has chosen!");
+    // } else if(choice1!==undefined){
+    //   $("#all1Btn").css('visibility', 'hidden');
+    //   $("#battleStatus").html(player1 + " has chosen!");
     // }
 
 
-    }, function(errorObject) {
-       console.log("The read failed: " + errorObject.code);
+  });
+
+  $(".btn1").on("click", function(){
+    var player1Choice = $(this).data('value');
+    $("#battleStatus").html(player1 + " has chosen!");
+    database.ref('/player/' + 1).set({
+      playerChoice: player1Choice,
+      playerName: player1,
+      dataWins: wins,
+      dataLoses: loses
+    });
+  });
+
+  $(".btn2").on("click", function(){
+    var player2Choice = $(this).data('value');
+    $("#battleStatus").html(player2 + " has chosen!");
+    database.ref('/player/' + 2).set({
+      playerChoice: player2Choice,
+      playerName: player2,
+      dataWins: wins,
+      dataLoses: loses
+    });
   });
 
 
