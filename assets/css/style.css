@@ -71,6 +71,10 @@ p{
 	visibility: hidden;
 }
 
+.battleP{
+	font-size: 2rem;
+}
+
 .rockBtn:hover{
 	color: white;
 }

@@ -1,4 +1,8 @@
 //initaializing firebase
+
+//https://calm-thicket-77557.herokuapp.com/
+
+
 var config = {
   apiKey: "AIzaSyA9IHRLhqM8poTc6Z9gNgYBkzls2Kv8ago",
   authDomain: "rps-multiplayer-dc43c.firebaseapp.com",
@@ -13,6 +17,7 @@ var player2 = null;
 var playerNum = 0;
 var wins = 0;
 var loses = 0;
+var currentPlayer = "";
 
 
 $("document").ready(function(){
@@ -40,7 +45,7 @@ $("document").ready(function(){
   //when the chatroom enterBtn is press it get a timestamp and the context of the input and store it in the firebase database
   $("#enterBtn").on("click", function(){
     // event.preventDefaut();
-    var input = moment().format('h:mm:ss a') + ":  " + $("#inputBox").val().trim();
+    var input = currentPlayer + " " + moment().format('h:mm:ss a') + ":  " + $("#inputBox").val().trim();
 
     $("#inputBox").val(""); //clear input box after it has been submitted
 
@@ -52,18 +57,18 @@ $("document").ready(function(){
 
   //setting playername in the firebase database
   $("#submtNameBtn").on("click",function(){
-    var inputName = $("#inputName").val().trim();
+    currentPlayer = $("#inputName").val().trim();
     $("#inputName").val("");
 
     if(player1===null){
       database.ref('/player/' + 1).set({
-          playerName: inputName,
+          playerName: currentPlayer,
           dataWins: loses,
           dataLoses: wins
       });
     } else if(player2===null){
       database.ref('/player/' + 2).set({
-          playerName: inputName,
+          playerName: currentPlayer,
           dataWins: wins,
           dataLoses: loses
       });
@@ -95,30 +100,37 @@ $("document").ready(function(){
     if(changedchildsnapshot.child(2).exists()){
       player2 = changedchildsnapshot.child(2).val().playerName;
       $("#player2Name").text(player2);
-      $("#all1Btn").css('visibility', 'visible');
-      $("#all2Btn").css('visibility', 'visible');
       $(".winLose").css('visibility', 'visible');
     }
+
+    if(changedchildsnapshot.child(1).val().playerName===currentPlayer){
+      $("#all1Btn").css('visibility', 'visible');
+    }
+
     var choice1 = changedchildsnapshot.child(1).val().playerChoice;
     var choice2 = changedchildsnapshot.child(2).val().playerChoice;
+
     // console.log(changedchildsnapshot.child(1).val().playerChoice);
     if(choice1 !== undefined && choice2 === undefined){
       $("#all1Btn").css('visibility', 'hidden');
+      if(changedchildsnapshot.child(2).val().playerName===currentPlayer){
+        $("#all2Btn").css('visibility', 'visible');
+      }
 
     } else if(choice2 !== undefined && choice1 === undefined){
       $("#all2Btn").css('visibility', 'hidden');
 
     } else if(choice1!==undefined&&choice2!==undefined){
       if((choice1==="rock"&&choice2==="scissor")||(choice1==="scissor"&&choice2==="paper")||(choice1==="paper"&&choice2==="rock")){
-        $("#battleStatus").html("<h1>" + player1 + " is the WINNER!</h1><p>" + player1 + " chose " + choice1 + "</p><p>"+ player2 + " chose " + choice2);
+        $("#battleStatus").html("<h1>" + player1 + " is the WINNER!</h1><p class='battleP'>" + player1 + " chose " + choice1 + "</p><p class='battleP'>"+ player2 + " chose " + choice2);
         wins++;
         statusUpdate();
       } else if((choice2==="rock"&&choice1==="scissor")||(choice2==="scissor"&&choice1==="paper")||(choice2==="paper"&&choice1==="rock")){
-        $("#battleStatus").html("<h1>" + player2 + " is the WINNER!</h1><p>" + player1 + " chose " + choice1 + "</p><p>"+ player2 + " chose " + choice2);
+        $("#battleStatus").html("<h1>" + player2 + " is the WINNER!</h1><p class='battleP'>" + player1 + " chose " + choice1 + "</p><p class='battleP'>"+ player2 + " chose " + choice2);
         loses++;
         statusUpdate();
       } else {
-        $("#battleStatus").html("<h1>IT'S A TIE!</h1><p>" + player1 + " chose " + choice1 + "</p><p>"+ player2 + " chose " + choice2);
+        $("#battleStatus").html("<h1>IT'S A TIE!</h1><p class='battleP'>" + player1 + " chose " + choice1 + "</p><p class='battleP'>"+ player2 + " chose " + choice2);
         statusUpdate();
       }
     } 
@@ -138,7 +150,6 @@ $("document").ready(function(){
 
   $(".btn2").on("click", function(){
     var player2Choice = $(this).data('value');
-    $("#battleStatus").html(player2 + " has chosen!");
     database.ref('/player/' + 2).set({
       playerChoice: player2Choice,
       playerName: player2,
