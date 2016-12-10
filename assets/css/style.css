@@ -67,7 +67,7 @@ p{
 	font-weight: bold;
 }
 
-#all1Btn, .winLose, #all2Btn{
+#all1Btn, #winLose1, #winLose2, #all2Btn{
 	visibility: hidden;
 }
 
@@ -94,7 +94,7 @@ p{
 	color: black;
 }
 
-.winLose{
+#winLose1, #winLose2{
 	font-size: 2rem;
 }
 
