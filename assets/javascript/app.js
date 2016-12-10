@@ -159,7 +159,6 @@ $("document").ready(function(){
 
     //if function to see if there is a update in player 2 name, and it will update accordingly. it will show the score which starts at 0-0
     if(changedchildsnapshot.child(2).exists()){
-      $("#battleStatus").html("Waiting on " + player1);
       player2 = changedchildsnapshot.child(2).val().playerName;
       if(player2===currentPlayer){
         $("#player2Name").text("You are " + player2);
